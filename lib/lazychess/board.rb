@@ -2,7 +2,7 @@ class Board
   attr_reader :pieces
 
   def initialize
-    @pieces = Piece.all
+    @pieces = Piece.build
   end
 end
 
