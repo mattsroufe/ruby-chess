@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+
+require 'net/http'
+require 'json'
+require 'pry'
+
+class Connection
+  TOKEN = "xoxp-19007494517-19011474082-19007915220-205475775d"
+  API_START = URI("https://slack.com/api/rtm.start?token=#{TOKEN}")
+
+  def initialize
+    response = Net::HTTP.get(API_START)
+    @session = JSON.parse(response)
+  end
+
+  def socket
+    @session["url"]
+  end
+end
+
+puts Connection.new.socket
