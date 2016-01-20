@@ -1,10 +1,17 @@
 require 'spec_helper'
 
 describe Player do
+  subject(:player) { Player.new }
 
   describe "#new" do
     it "creates a new player" do
-      expect(Player.new).to be_an_instance_of Player
+      expect(player).to be_an_instance_of Player
+    end
+  end
+
+  describe "#pieces" do
+    it "returns the players pieces" do
+      expect(player.pieces).to eq([])
     end
   end
 end
