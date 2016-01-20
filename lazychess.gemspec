@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'init/version'
+require 'lazychess/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "init"
-  spec.version       = Init::VERSION
+  spec.name          = "lazychess"
+  spec.version       = Lazychess::VERSION
   spec.authors       = ["Matthew Gray"]
   spec.email         = ["matthew.gray@powershop.co.nz"]
 
