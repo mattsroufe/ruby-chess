@@ -1,6 +1,8 @@
 class Game
+  attr_reader :board, :players
 
-  def board
+  def initialize
     @board ||= Board.new
+    @players = []
   end
 end

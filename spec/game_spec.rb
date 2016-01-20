@@ -14,4 +14,10 @@ describe Game do
       expect(subject.board).to be_an_instance_of Board
     end
   end
+
+  describe "#players" do
+    it "returns the players" do
+      expect(subject.players).to eq([])
+    end
+  end
 end
