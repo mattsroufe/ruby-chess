@@ -1,12 +1,7 @@
-class Piece
+class StartGame
   POSITIONS = {::Castle => 'a1', ::Bishop => 'a2'}
 
-  def initialize(position)
-    @position = position
-  end
-
-  def self.build
-    []
+  def call
     POSITIONS.map do |k, v|
       k.new(v)
     end
