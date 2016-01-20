@@ -3,6 +3,14 @@ class Game
 
   def initialize
     @board ||= Board.new
-    @players = []
+    @players = [Player.new] * 2
+  end
+
+  def player_one
+    @players.first
+  end
+
+  def player_two
+    @players.last
   end
 end
