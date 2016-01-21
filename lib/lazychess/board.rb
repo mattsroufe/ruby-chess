@@ -47,19 +47,19 @@ class Board
 
     WHITE_POSITIONS.each do |piece_position|
       piece, position = piece_position.split(' ')
-      color = 'white'
+      color = :white
       @pieces << Object.const_get(piece).new(color, position)
     end
 
     BLACK_POSITIONS.each do |piece_position|
       piece, position = piece_position.split(' ')
-      color = 'black'
+      color = :black
       @pieces << Object.const_get(piece).new(color, position)
     end
 
     Array(history).each_slice(2) do |turns|
       turns.each_with_index do |recorded_move, i|
-        color = i == 0 ? 'white' : 'black'
+        color = i == 0 ? :white : :black
         if recorded_move.length == 2
           piece = pieces.find { |piece| piece.is_a?(Pawn) && piece.color == color && piece.file == recorded_move[0] }
           piece.position = recorded_move
