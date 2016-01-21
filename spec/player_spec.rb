@@ -14,4 +14,10 @@ describe Player do
       expect(player.pieces).to eq([])
     end
   end
+
+  describe "#moves" do
+    it "returns the players moves" do
+      expect(player.moves).to eq([])
+    end
+  end
 end
