@@ -1,16 +1,13 @@
 class Game
-  attr_reader :board, :players
+  attr_reader :board, :player_one, :player_two
 
   def initialize
     @board ||= Board.new
-    @players = [Player.new] * 2
+    @player_one = Player.new
+    @player_two = Player.new
   end
 
-  def player_one
-    @players.first
-  end
-
-  def player_two
-    @players.last
+  def players
+    [player_one, player_two]
   end
 end

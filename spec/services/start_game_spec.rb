@@ -12,7 +12,7 @@ describe StartGame do
 
   describe "#call" do
     it "starts the game" do
-      expect { start_game.call }.to change { start_game.game.player_one.pieces.count}.from(0).to(12)
+      expect { start_game.call }.to change { start_game.game.player_one.pieces.count}.from(0).to(16)
     end
   end
 end
