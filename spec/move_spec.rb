@@ -1,22 +1,22 @@
 require 'spec_helper'
 
 describe Move do
-  describe "#valid?" do
-    context "not a Pawn" do
-      it "returns false" do
-        pieces = [Bishop.new("white", "a1")]
-        piece = pieces.first
-        new_position = "e1"
-        expect(Move.new(pieces, piece, new_position).valid?).to eq(false)
-      end
-    end
+  let(:pieces)       { [Bishop.new("white", "c1")] }
+  let(:old_position) { "c1" }
+  let(:new_position) { "e1" }
 
-    context "Pawn" do
-      it "returns true" do
-        pieces = [Pawn.new("white", "a1")]
-        pawn = pieces.first
-        new_position = "e1"
-        expect(Move.new(pieces, pawn, new_position).valid?).to eq(true)
+  describe "#new" do
+    let(:old_position) { "a1" }
+
+    it "raises an error if there is no piece in the old_position" do
+      expect { Move.new(pieces, old_position, new_position) }.to raise_error Move::NoPieceError
+    end
+  end
+
+  describe "#valid?" do
+    context "when the new_position is not one of the pieces possible moves" do
+      it "returns false" do
+        expect(Move.new(pieces, old_position, new_position).valid?).to eq(false)
       end
     end
   end

@@ -1,12 +1,17 @@
 class Move
-  def initialize(pieces, piece, new_position)
+  attr_reader :piece
+
+  class NoPieceError < StandardError; end
+
+  def initialize(pieces, old_position, new_position)
     @pieces       = pieces
-    @piece        = piece
+    @old_position = old_position
     @new_position = new_position
+    @piece        = pieces.find { |piece| piece.position == old_position }
+    raise NoPieceError unless @piece
   end
 
   def valid?
-    return true if @piece.class == Pawn
     false
   end
 end
