@@ -6,40 +6,47 @@ class Session
   end
 
   def run
-    read_channel
+    websocket.on :open do |event|
+      #join_test_channel
+
+      print_welcome_message
+
+      listen_for_game_commands
+    end
+  end
+
+  def join_test_channel
+    @slack.websocket
+  end
+
+  def print_welcome_message
+    @slack.send_message("Hello samu", test_channel)
   end
 
   def test_channel
-    "chess-sam-kunal"
+    # "chess-sam-kunal"
+    "chess-matthew-samu"
   end
 
   def send_message_to_channel(message, channel_id)
-    websocket.send({ "id" => 1, "type" => "message", "channel" => channel_id, "text" => message }.to_json)
+    command = {
+      "id":      1,
+      "type":    "message",
+      "channel": channel_id,
+      "text":    message
+    }
+    websocket.send(command.to_json)
   end
 
-  def read_channel
+  def listen_for_game_commands
     websocket.on :message do |event|
       p [:message, event.data]
-
-      data = JSON.parse(event.data)
-      if data["type"] == "message"
-        message = "Parrot:" + data["text"]
-        send_message_to_channel(message, @slack.find_channel_id(test_channel))
-      end
+      #data = JSON.parse(event.data)
+      #message = "Parrot:" + data["text"]
+      #send_message_to_channel(message, @slack.find_channel_id(test_channel))
     end
   end
  
-  def talky
-    websocket.on :message do |event|
-      p [:message, event.data]
-    end
-
-    websocket.on :close do |event|
-      p [:close, event.code, event.reason]
-      reset
-    end
-  end
-
   private
 
   def websocket
