@@ -12,7 +12,7 @@ describe Board do
 
   describe "#pieces" do
     it "returns the pieces" do
-      # expect(subject.pieces.count).to eq(2)
+      expect(subject.pieces.count).to eq(32)
     end
   end
 end
