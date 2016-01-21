@@ -6,12 +6,12 @@ describe Board do
   def printed_board(board)
     board_string = ""
     Board::RANKS.reverse.each do |rank|
-      arr = []
+      board_string << "| "
       Board::FILES.each do |file|
         piece = board.pieces.find { |piece| piece.position == [file, rank].join }
-        arr << (piece ? [piece.color[0], piece.short_name].join : '  ')
+        board_string << (piece ? [piece.color[0], piece.short_name, ' '].join : '   ')
       end
-      board_string << "| " + arr.join(' ') + " |\n"
+      board_string << "|\n"
     end
     board_string
   end
