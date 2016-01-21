@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Piece do
-  let(:piece) { Piece.new("a1") }
+  let(:piece) { Piece.new("white", "a1") }
 
   describe "#rank" do
     it "returns the rank" do

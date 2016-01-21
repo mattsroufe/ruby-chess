@@ -48,12 +48,14 @@ class StartGame
   def call
     WHITE_POSITIONS.each do |piece_position|
       piece, position = piece_position.split(' ')
-      game.player_one.pieces << Object.const_get(piece).new(position)
+      color = 'white'
+      game.player_one.pieces << Object.const_get(piece).new(color, position)
     end
 
     BLACK_POSITIONS.each do |piece_position|
       piece, position = piece_position.split(' ')
-      game.player_two.pieces << Object.const_get(piece).new(position)
+      color = 'black'
+      game.player_two.pieces << Object.const_get(piece).new(color, position)
     end
 
     game

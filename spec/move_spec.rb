@@ -4,7 +4,7 @@ describe Move do
   describe "#valid?" do
     context "not a Pawn" do
       it "returns false" do
-        pieces = [Bishop.new("a1")]
+        pieces = [Bishop.new("white", "a1")]
         piece = pieces.first
         new_position = "e1"
         expect(Move.new(pieces, piece, new_position).valid?).to eq(false)
@@ -13,7 +13,7 @@ describe Move do
 
     context "Pawn" do
       it "returns true" do
-        pieces = [Pawn.new("a1")]
+        pieces = [Pawn.new("white", "a1")]
         pawn = pieces.first
         new_position = "e1"
         expect(Move.new(pieces, pawn, new_position).valid?).to eq(true)
