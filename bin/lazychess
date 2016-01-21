@@ -2,12 +2,14 @@
 
 require 'net/http'
 require 'json'
-require 'pry'
+# require 'pry'
 require 'faye/websocket'
 require 'eventmachine'
+# require 'byebug'
 
 class Slack
   TOKEN = "xoxp-19007494517-19011474082-19007915220-205475775d"
+  # TOKEN = "xoxb-19012836615-UXersvIAojrfXGYCHiuSu2ov"
 
   def real_time_session
     get('rtm.start')
@@ -47,17 +49,21 @@ class Session
   end
 
   def run
-    
+    talky
   end
 
   def test_channel
-    @slack.game_channels.first
+    @slack.game_channels.last
   end
  
   def talky
     websocket.on :open do |event|
       p [:open]
-      websocket.send('Hello, world!')
+      websocket.send({
+        "type": 'message',
+        "channel": test_channel["id"],
+        'text': 'kunal was here and matthew watched'
+      }.to_json)
     end
 
     websocket.on :message do |event|
