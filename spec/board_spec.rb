@@ -35,7 +35,7 @@ eos
     context "with pieces passed in" do
       it "sets up board properly" do
         board = Board.new
-        board.move_piece('e2', 'e4')
+        board.move(:white, 'e4')
         expect(printed_board(Board.new(board.pieces))).to eq <<-eos
 | bC bN bB bK bQ bB bN bC |
 | bP bP bP bP bP bP bP bP |
@@ -56,12 +56,12 @@ eos
     end
   end
 
-  describe "#move_piece" do
+  describe "#move" do
     it "moves the piece to the new position" do
       expect(board.pieces['e2']).to be_a Pawn
       expect(board.pieces['e4']).to be_nil
 
-      board.move_piece('e2', 'e4')
+      board.move(:white, 'e4')
 
       expect(board.pieces['e2']).to be_nil
       expect(board.pieces['e4']).to be_a Pawn

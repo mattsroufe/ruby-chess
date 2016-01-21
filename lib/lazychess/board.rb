@@ -70,7 +70,11 @@ class Board
     # end
   end
 
-  def move_piece(from, to)
+  def move(color, notation)
+    if recorded_move.length == 2
+      piece = pieces.notation[0]
+    end
+
     pieces[to] = pieces.delete(from)
   end
 end
