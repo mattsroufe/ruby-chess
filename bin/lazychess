@@ -3,19 +3,86 @@
 require 'net/http'
 require 'json'
 require 'pry'
+require 'faye/websocket'
+require 'eventmachine'
 
-class Connection
+class Slack
   TOKEN = "xoxp-19007494517-19011474082-19007915220-205475775d"
-  API_START = URI("https://slack.com/api/rtm.start?token=#{TOKEN}")
 
-  def initialize
-    response = Net::HTTP.get(API_START)
-    @session = JSON.parse(response)
+  def real_time_session
+    get('rtm.start')
   end
 
-  def socket
-    @session["url"]
+  def game_channels
+    channel_list.select do |channel|
+      channel['name'].match(/\Achess\-/)
+    end
+  end
+
+  private
+
+  def channel_list
+    data = get('channels.list')
+    data["channels"].map do |channel|
+      slice('id', 'name', channel)
+    end
+  end
+
+  def slice(*keys, hash)
+    keys.map.with_object({}) do |key, slice|
+      slice[key] = hash[key]
+    end
+  end
+
+  def get(resource)
+    uri = URI("https://slack.com/api/#{resource}?token=#{TOKEN}")
+    response = Net::HTTP.get(uri)
+    JSON.parse(response)
   end
 end
 
-puts Connection.new.socket
+class Session
+  def initialize
+    @slack = Slack.new
+  end
+
+  def run
+    
+  end
+
+  def test_channel
+    @slack.game_channels.first
+  end
+ 
+  def talky
+    websocket.on :open do |event|
+      p [:open]
+      websocket.send('Hello, world!')
+    end
+
+    websocket.on :message do |event|
+      p [:message, event.data]
+    end
+
+    websocket.on :close do |event|
+      p [:close, event.code, event.reason]
+      reset
+    end
+  end
+
+  private
+
+  def websocket
+    @websocket ||= Faye::WebSocket::Client.new(websocket_url)
+  end
+
+  def reset
+    @websocket = nil
+  end
+
+  def websocket_url
+    @slack.real_time_session["url"]
+  end
+end
+
+EM.run { Session.new.run }
