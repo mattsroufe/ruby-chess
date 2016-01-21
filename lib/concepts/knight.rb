@@ -10,10 +10,10 @@ class Knight < Piece
     moves.add("#{Piece::HOR_POS[(file + 2) - 1]}#{rank - 1}") unless invalid_file?((file + 2) - 1)
     moves.add("#{Piece::HOR_POS[(file - 2) - 1]}#{rank + 1}") unless invalid_file?((file - 2) - 1)
     moves.add("#{Piece::HOR_POS[(file - 2) - 1]}#{rank - 1}") unless invalid_file?((file - 2) - 1)
-    moves.add("#{Piece::HOR_POS[(file + 1) - 1]}#{rank + 2}") unless invalid_file?(file + 1)
-    moves.add("#{Piece::HOR_POS[(file + 1) - 1]}#{rank - 2}") unless invalid_file?(file + 1)
-    moves.add("#{Piece::HOR_POS[(file - 1) - 1]}#{rank + 2}") unless invalid_file?(file - 1)
-    moves.add("#{Piece::HOR_POS[(file - 1) - 1]}#{rank - 2}") unless invalid_file?(file - 1)
+    moves.add("#{Piece::HOR_POS[(file + 1) - 1]}#{rank + 2}") unless invalid_file?(file)
+    moves.add("#{Piece::HOR_POS[(file + 1) - 1]}#{rank - 2}") unless invalid_file?(file)
+    moves.add("#{Piece::HOR_POS[(file - 1) - 1]}#{rank + 2}") unless invalid_file?(file - 2)
+    moves.add("#{Piece::HOR_POS[(file - 1) - 1]}#{rank - 2}") unless invalid_file?(file - 2)
 
     moves.reject! { |move| move.length != 2 }
     valid_moves(moves.to_a)
