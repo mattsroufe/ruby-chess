@@ -3,8 +3,11 @@ require 'spec_helper'
 describe 'Knight' do
   describe '#possible_moves' do
     context 'from the initial position' do
+      let(:knight) { Knight.new("black", "g1") }
+
       it 'returns only three possible moves from g1' do
-        expect(Knight.new(:black, "g1").possible_moves.length).to eq 3
+        expect(knight.possible_moves.length).to eq 3
+        expect(knight.possible_moves).to eq ["e2", "h3", "f3"]
       end
 
       it 'returns only three possible moves from g2' do

@@ -8,6 +8,7 @@ describe 'Pawn' do
 
       it 'it returns four possible moves' do
         expect(pawn.possible_moves.length).to eq 4
+        expect(pawn.possible_moves).to eq ["c4", "c3", "b3", "d3"]
       end
     end
 
