@@ -15,7 +15,7 @@ describe Player do
 
   describe "#pieces" do
     it "returns the players pieces" do
-      expect(player.pieces.count).to eq(12)
+      expect(player.pieces.count).to eq(16)
     end
   end
 
@@ -26,12 +26,11 @@ describe Player do
   end
 
   describe "#move" do
-    let(:position) { "e4" }
+    let(:old_position) { "e2" }
+    let(:new_position) { "e4" }
 
     it "makes a move" do
-      expect(player.position(position))
-      expect { player.move(position) }.to change { player.moves.count }.by(1)
-      expect(player.move(position)).to eq("")
+      expect { player.move(new_position) }.to change { player.find_piece_at(old_position).position }.from(old_position).to(new_position)
     end
   end
 
