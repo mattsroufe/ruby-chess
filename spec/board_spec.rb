@@ -8,7 +8,7 @@ describe Board do
     Board::RANKS.reverse.each do |rank|
       board_string << "| "
       Board::FILES.each do |file|
-        piece = board.pieces.find { |piece| piece.position == [file, rank].join }
+        piece = board.find_piece_by_position("#{file}#{rank}")
         board_string << (piece ? [piece.color[0], piece.short_name, ' '].join : '   ')
       end
       board_string << "|\n"
@@ -36,14 +36,17 @@ eos
       it "sets up board properly" do
         board = Board.new
         board.move(:white, 'e4')
+        board.move(:black, 'e5')
+        board.move(:white, 'd4')
+        board.move(:black, 'exd4')
         expect(printed_board(Board.new(board.pieces))).to eq <<-eos
 | bC bN bB bK bQ bB bN bC |
-| bP bP bP bP bP bP bP bP |
+| bP bP bP bP    bP bP bP |
 |                         |
 |                         |
-|             wP          |
+|          bP wP          |
 |                         |
-| wP wP wP wP    wP wP wP |
+| wP wP wP       wP wP wP |
 | wC wN wB wK wQ wB wN wC |
 eos
       end
@@ -71,6 +74,12 @@ eos
   describe "#find_piece_by_position" do
     it "finds the piece at the given position" do
       expect(board.find_piece_by_position('e2')).to be_a Pawn
+    end
+  end
+
+  describe "#remove" do
+    it "removes the piece from the board" do
+      expect { board.remove('e2') }.to change { board.pieces.count }.by(-1)
     end
   end
 end

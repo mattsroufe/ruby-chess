@@ -61,13 +61,34 @@ class Board
   end
 
   def move(color, notation)
-    if notation.length == 2
-      piece = pieces.find { |piece| piece.is_a?(Pawn) && piece.color == color && piece.file == notation[0] }
-      piece.position = notation
+    if pawn_move?(notation)
+      pawn = pieces.find { |piece| piece.is_a?(Pawn) && piece.color == color && piece.file == notation[0] }
+
+      if capture?(notation)
+        position = notation.split('x').last
+        remove(position)
+        pawn.position = position
+      else
+        pawn.position = notation
+      end
     end
   end
 
   def find_piece_by_position(position)
     pieces.find { |piece| piece.position == position }
+  end
+
+  def remove(position)
+    pieces.delete(find_piece_by_position(position))
+  end
+
+  private
+
+  def pawn_move?(str)
+    str[0] == str[0].downcase
+  end
+
+  def capture?(str)
+    str.include?('x')
   end
 end
