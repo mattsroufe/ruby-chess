@@ -39,15 +39,16 @@ eos
         board.move(:black, 'e5')
         board.move(:white, 'd4')
         board.move(:black, 'exd4')
+        board.move(:white, 'Nf3')
         expect(printed_board(Board.new(board.pieces))).to eq <<-eos
 | bC bN bB bK bQ bB bN bC |
 | bP bP bP bP    bP bP bP |
 |                         |
 |                         |
 |          bP wP          |
-|                         |
+|                wN       |
 | wP wP wP       wP wP wP |
-| wC wN wB wK wQ wB wN wC |
+| wC wN wB wK wQ wB    wC |
 eos
       end
     end

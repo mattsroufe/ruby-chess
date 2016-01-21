@@ -71,6 +71,10 @@ class Board
       else
         pawn.position = notation
       end
+    elsif knight_move?(notation)
+      position = notation[1..-1]
+      knight = pieces.find { |piece| piece.is_a?(Knight) && piece.color == color && piece.possible_moves.include?(position) }
+      knight.position = position
     end
   end
 
@@ -86,6 +90,10 @@ class Board
 
   def pawn_move?(str)
     str[0] == str[0].downcase
+  end
+
+  def knight_move?(str)
+    str[0] == "N"
   end
 
   def capture?(str)
