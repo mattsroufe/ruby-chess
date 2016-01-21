@@ -14,7 +14,7 @@ class Session
   end
 
   def send_message_to_channel(message, channel_id)
-    websocket.send({ "id": 1, "type": "message", "channel": channel_id, "text": message }.to_json)
+    websocket.send({ "id" => 1, "type" => "message", "channel" => channel_id, "text" => message }.to_json)
   end
 
   def read_channel
