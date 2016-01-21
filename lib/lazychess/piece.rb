@@ -1,6 +1,8 @@
 class Piece
   attr_accessor :position
 
+  HOR_POS = ["a", "b", "c", "d", "e", "f", "g", "h"]
+
   def initialize(position)
     @position = position
   end
