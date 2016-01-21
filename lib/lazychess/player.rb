@@ -8,7 +8,7 @@ class Player
 
   def move(position)
     file = position[0]
-    piece = pieces.find { |piece| piece.position[0] = file }
+    piece = pieces.find { |piece| piece.position[0] == file }
     piece.position = position
   end
 

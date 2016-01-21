@@ -28,9 +28,10 @@ describe Player do
   describe "#move" do
     let(:old_position) { "e2" }
     let(:new_position) { "e4" }
+    let(:previous_position) { player.find_piece_at(old_position).position  }
 
     it "makes a move" do
-      expect { player.move(new_position) }.to change { player.find_piece_at(old_position).position }.from(old_position).to(new_position)
+      expect { player.move(new_position) }.to change(player.find_piece_at(old_position), :position).from(old_position).to(new_position)
     end
   end
 
