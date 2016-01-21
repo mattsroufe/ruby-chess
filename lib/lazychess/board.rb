@@ -42,29 +42,35 @@ class Board
     'Castle h8'
   ]
 
-  def initialize(*history)
-    @pieces = []
+  def initialize(pieces = [])
+    @pieces = pieces
 
-    WHITE_POSITIONS.each do |piece_position|
-      piece, position = piece_position.split(' ')
-      color = :white
-      @pieces << Object.const_get(piece).new(color, position)
-    end
+    if pieces.empty?
+      WHITE_POSITIONS.each do |piece_position|
+        piece, position = piece_position.split(' ')
+        color = :white
+        @pieces << Object.const_get(piece).new(color, position)
+      end
 
-    BLACK_POSITIONS.each do |piece_position|
-      piece, position = piece_position.split(' ')
-      color = :black
-      @pieces << Object.const_get(piece).new(color, position)
-    end
-
-    Array(history).each_slice(2) do |turns|
-      turns.each_with_index do |recorded_move, i|
-        color = i == 0 ? :white : :black
-        if recorded_move.length == 2
-          piece = pieces.find { |piece| piece.is_a?(Pawn) && piece.color == color && piece.file == recorded_move[0] }
-          piece.position = recorded_move
-        end
+      BLACK_POSITIONS.each do |piece_position|
+        piece, position = piece_position.split(' ')
+        color = :black
+        @pieces << Object.const_get(piece).new(color, position)
       end
     end
+
+    # Array(history).each_slice(2) do |turns|
+    #   turns.each_with_index do |recorded_move, i|
+    #     color = i == 0 ? :white : :black
+    #     if recorded_move.length == 2
+    #       piece = pieces.find { |piece| piece.is_a?(Pawn) && piece.color == color && piece.file == recorded_move[0] }
+    #       piece.position = recorded_move
+    #     end
+    #   end
+    # end
+  end
+
+  def find_piece_by_position(position)
+    pieces.find { |piece| piece.position == position }
   end
 end

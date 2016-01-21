@@ -17,8 +17,9 @@ describe Board do
   end
 
   describe "#new" do
-    it "initializes a board with the pieces positioned correctly" do
-      expect(printed_board(board)).to eq <<-eos
+    context "with no pieces passed in" do
+      it "initializes a board with the pieces positioned correctly" do
+        expect(printed_board(board)).to eq <<-eos
 | bC bN bB bK bQ bB bN bC |
 | bP bP bP bP bP bP bP bP |
 |                         |
@@ -28,22 +29,36 @@ describe Board do
 | wP wP wP wP wP wP wP wP |
 | wC wN wB wK wQ wB wN wC |
 eos
-      expect(printed_board(Board.new("e4", "e5", "d4"))).to eq <<-eos
+      end
+    end
+
+    context "with pieces passed in" do
+      it "sets up board properly" do
+        board = Board.new
+        board.find_piece_by_position('e2').position = 'e4'
+        expect(printed_board(Board.new(board.pieces))).to eq <<-eos
 | bC bN bB bK bQ bB bN bC |
-| bP bP bP bP    bP bP bP |
+| bP bP bP bP bP bP bP bP |
 |                         |
-|             bP          |
-|          wP wP          |
 |                         |
-| wP wP wP       wP wP wP |
+|             wP          |
+|                         |
+| wP wP wP wP    wP wP wP |
 | wC wN wB wK wQ wB wN wC |
 eos
+      end
     end
   end
 
   describe "#pieces" do
     it "returns the pieces" do
       expect(subject.pieces.count).to eq(32)
+    end
+  end
+
+  describe "#find_piece_by_position" do
+    it "finds the piece at the given position" do
+      expect(board.find_piece_by_position('e2')).to be_a Pawn
     end
   end
 end
