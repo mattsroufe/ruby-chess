@@ -42,7 +42,7 @@ class Board
     'Castle h8'
   ]
 
-  def initialize
+  def initialize(str = "")
     @pieces = []
 
     WHITE_POSITIONS.each do |piece_position|

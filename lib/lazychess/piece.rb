@@ -15,4 +15,8 @@ class Piece
   def file
     position[0]
   end
+
+  def short_name
+    self.class.to_s[0]
+  end
 end

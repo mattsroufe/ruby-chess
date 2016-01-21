@@ -29,4 +29,8 @@ class Knight < Piece
     all_possible_moves.select! { |move| ("a".."h").include?(move[0]) && (1..8).include?(move[1].to_i) }
     all_possible_moves
   end
+
+  def short_name
+    "N"
+  end
 end
