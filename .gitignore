@@ -1,4 +1,6 @@
 .DS_store
 Gemfile
 .ruby-version
+/lib/lazychess/local.rb
+.byebug_history
 
