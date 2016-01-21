@@ -3,8 +3,8 @@ require 'json'
 require 'faye/websocket'
 
 class Slack
-  TOKEN = "xoxp-19007494517-19011474082-19007915220-205475775d"
-  # TOKEN = "xoxb-19012836615-UXersvIAojrfXGYCHiuSu2ov" => only works with the bot
+  TOKEN = "xoxp-19007494517-19011474082-19007915220-205475775d" # Kunal's token that works with the RTM
+  # TOKEN = "xoxb-19012836615-WkvbEtky41yYHGvq7gsJY4nW" # Bots token but only works with the API not RTM
 
   def real_time_session
     get('rtm.start')

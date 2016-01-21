@@ -6,14 +6,7 @@ class Session
   end
 
   def run
-    message = "hello world"
-    # @slack.send_message(message, test_channel)
-    # send_message_to_channel(message, @slack.find_channel_id(test_channel))
-
     read_channel
-    # while(true)
-
-    # end
   end
 
   def test_channel
@@ -21,9 +14,7 @@ class Session
   end
 
   def send_message_to_channel(message, channel_id)
-    websocket.on :open do |event|
-      websocket.send({ "id": 1, "type": "message", "channel": channel_id, "text": message }.to_json)
-    end
+    websocket.send({ "id": 1, "type": "message", "channel": channel_id, "text": message }.to_json)
   end
 
   def read_channel
