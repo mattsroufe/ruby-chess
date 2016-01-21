@@ -8,7 +8,7 @@ describe Board do
     Board::RANKS.reverse.each do |rank|
       board_string << "| "
       Board::FILES.each do |file|
-        piece = board.pieces["#{file}#{rank}"]
+        piece = board.pieces.find { |piece| piece.position == [file, rank].join }
         board_string << (piece ? [piece.color[0], piece.short_name, ' '].join : '   ')
       end
       board_string << "|\n"
@@ -65,6 +65,12 @@ eos
 
       expect(board.pieces['e2']).to be_nil
       expect(board.pieces['e4']).to be_a Pawn
+    end
+  end
+
+  describe "#find_piece_by_position" do
+    it "finds the piece at the given position" do
+      expect(board.find_piece_by_position('e2')).to be_a Pawn
     end
   end
 end

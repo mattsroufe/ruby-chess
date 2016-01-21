@@ -42,20 +42,20 @@ class Board
     'Castle h8'
   ]
 
-  def initialize(pieces = {})
+  def initialize(pieces = [])
     @pieces = pieces
 
     if pieces.empty?
       WHITE_POSITIONS.each do |piece_position|
         piece, position = piece_position.split(' ')
         color = :white
-        @pieces[position] = Object.const_get(piece).new(color, position)
+        @pieces << Object.const_get(piece).new(color, position)
       end
 
       BLACK_POSITIONS.each do |piece_position|
         piece, position = piece_position.split(' ')
         color = :black
-        @pieces[position] = Object.const_get(piece).new(color, position)
+        @pieces << Object.const_get(piece).new(color, position)
       end
     end
 
@@ -74,7 +74,9 @@ class Board
     if recorded_move.length == 2
       piece = pieces.notation[0]
     end
+  end
 
-    pieces[to] = pieces.delete(from)
+  def find_piece_by_position(position)
+    pieces.find { |piece| piece.position == position }
   end
 end
