@@ -58,21 +58,12 @@ class Board
         @pieces << Object.const_get(piece).new(color, position)
       end
     end
-
-    # Array(history).each_slice(2) do |turns|
-    #   turns.each_with_index do |recorded_move, i|
-    #     color = i == 0 ? :white : :black
-    #     if recorded_move.length == 2
-    #       piece = pieces.find { |piece| piece.is_a?(Pawn) && piece.color == color && piece.file == recorded_move[0] }
-    #       piece.position = recorded_move
-    #     end
-    #   end
-    # end
   end
 
   def move(color, notation)
-    if recorded_move.length == 2
-      piece = pieces.notation[0]
+    if notation.length == 2
+      piece = pieces.find { |piece| piece.is_a?(Pawn) && piece.color == color && piece.file == notation[0] }
+      piece.position = notation
     end
   end
 

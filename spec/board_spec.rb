@@ -58,13 +58,13 @@ eos
 
   describe "#move" do
     it "moves the piece to the new position" do
-      expect(board.pieces['e2']).to be_a Pawn
-      expect(board.pieces['e4']).to be_nil
+      expect(board.find_piece_by_position('e2')).to be_a Pawn
+      expect(board.find_piece_by_position('e4')).to be_nil
 
       board.move(:white, 'e4')
 
-      expect(board.pieces['e2']).to be_nil
-      expect(board.pieces['e4']).to be_a Pawn
+      expect(board.find_piece_by_position('e2')).to be_nil
+      expect(board.find_piece_by_position('e4')).to be_a Pawn
     end
   end
 
