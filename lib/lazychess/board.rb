@@ -75,8 +75,8 @@ class Board
       if capture?(notation)
         position = notation.split('x').last
         knight = pieces.find { |piece| piece.is_a?(Knight) && piece.color == color && piece.possible_moves.include?(position) }
-        remove(position)
         knight.position = position
+        remove(position)
       else
         position = notation[1..-1]
         knight = pieces.find { |piece| piece.is_a?(Knight) && piece.color == color && piece.possible_moves.include?(position) }
@@ -94,7 +94,7 @@ class Board
   end
 
   def remove(position)
-    pieces.delete(find_piece_by_position(position))
+    pieces.reverse.delete(find_piece_by_position(position))
   end
 
   private

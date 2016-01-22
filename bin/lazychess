@@ -19,9 +19,8 @@ game = Game.new
 puts "Time to play some mafakan chess!!"
 puts "White begins:"
 
-
-  until game.has_been_won? do
-    begin
+until game.has_been_won? do
+  begin
     puts BoardPrinter.new.print(game.board)
     puts "Enter move:"
     move = gets.chomp
@@ -30,7 +29,7 @@ puts "White begins:"
     current_player == :white ? current_player = :black : current_player = :white
 
     puts "#{current_player}'s move:"
-    rescue Piece::IllegalMoveError
-      puts "That's an illegal move"
-    end
+  rescue Piece::IllegalMoveError
+    puts "That's an illegal move"
   end
+end

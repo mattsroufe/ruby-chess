@@ -42,7 +42,17 @@ eos
 | wC wN wB wK wQ wB wN wC |
 eos
       expect(board.find_piece_by_position('e4').possible_moves).to match_array(['d5', 'e5'])
-#       board.move(:white, 'd4')
+      board.move(:white, 'exd5')
+      expect(print(board)).to eq <<-eos
+| bC bN bB bK bQ bB bN bC |
+| bP bP bP    bP bP bP bP |
+|                         |
+|          wP             |
+|                         |
+|                         |
+| wP wP wP wP    wP wP wP |
+| wC wN wB wK wQ wB wN wC |
+eos
 #       board.move(:black, 'exd4')
 #       board.move(:white, 'Nf3')
 #       board.move(:black, 'Nc6')
