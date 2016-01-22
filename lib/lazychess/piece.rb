@@ -1,5 +1,8 @@
 class Piece
-  attr_accessor :board, :color, :position
+  attr_accessor :board, :color
+  attr_reader :position
+
+  class IllegalMoveError < StandardError; end
 
   HOR_POS = ["a", "b", "c", "d", "e", "f", "g", "h"]
 
@@ -7,6 +10,11 @@ class Piece
     @board    = board
     @color    = color
     @position = position
+  end
+
+  def position=(new_position)
+    raise IllegalMoveError unless possible_moves.include?(new_position)
+    @position = new_position
   end
 
   def rank
