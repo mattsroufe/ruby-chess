@@ -24,6 +24,7 @@ class Pawn < Piece
   end
 
   def move(int)
+    int = -int if color == :black
     [file, rank + int].join
   end
 end
