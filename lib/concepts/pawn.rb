@@ -1,27 +1,29 @@
 class Pawn < Piece
   attr_reader :initial_position
 
-  def initialize(board, color, position)
-    super(board, color, position)
-    @initial_position = position
-  end
-
   def possible_moves
-    moves = []
-    file = Piece::HOR_POS.index(self.position[0])
-    rank = self.position[1].to_i
-
-    self.color = :white ? direction = 1 : direction = -1
-
-    moves << "#{Piece::HOR_POS[file]}#{rank + (direction * 2)}" unless self.position != self.initial_position
-    moves << "#{Piece::HOR_POS[file]}#{rank + direction}"
-    moves << "#{Piece::HOR_POS[file - 1]}#{rank + direction}" unless invalid_file?(file - 1)
-    moves << "#{Piece::HOR_POS[file + 1]}#{rank + direction}" unless invalid_file?(file + 1)
-
+    moves = attacking_moves
+    moves << move(1) if board.empty?(move(1))
+    moves << move(2) if moves.include?(move(1)) && board.empty?(move(2)) && at_start_position?
     moves
   end
 
-  def invalid_file?(file)
-    file < 0 || !(1..9).include?(file) || Piece::HOR_POS[file + 1].nil?
+  private
+
+  def attacking_moves
+    moves = []
+    right = [Board::FILES[file_index + 1], rank + 1].join
+    left = [Board::FILES[file_index - 1], rank + 1].join
+    moves << right if file_index < 7 && board.find_piece_by_position(right)
+    moves << left if file_index > 0 && board.find_piece_by_position(left)
+    moves
+  end
+
+  def at_start_position?
+    color == :black ? rank == 7 : rank == 2
+  end
+
+  def move(int)
+    [file, rank + int].join
   end
 end

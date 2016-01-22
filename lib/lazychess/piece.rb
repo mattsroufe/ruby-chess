@@ -4,6 +4,7 @@ class Piece
   HOR_POS = ["a", "b", "c", "d", "e", "f", "g", "h"]
 
   def initialize(board, color, position)
+    @board    = board
     @color    = color
     @position = position
   end
@@ -14,6 +15,10 @@ class Piece
 
   def file
     position[0]
+  end
+
+  def file_index
+    Board::FILES.index(file)
   end
 
   def short_name

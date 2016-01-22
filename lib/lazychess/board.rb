@@ -89,6 +89,10 @@ class Board
     pieces.find { |piece| piece.position == position }
   end
 
+  def empty?(position)
+    !find_piece_by_position(position)
+  end
+
   def remove(position)
     pieces.delete(find_piece_by_position(position))
   end
