@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Board do
   subject(:board) { Board.new }
 
-  def printed_board(board)
+  def print(board)
     board_string = ""
     Board::RANKS.reverse.each do |rank|
       board_string << "| "
@@ -17,9 +17,8 @@ describe Board do
   end
 
   describe "#new" do
-    context "with no pieces passed in" do
-      it "initializes a board with the pieces positioned correctly" do
-        expect(printed_board(board)).to eq <<-eos
+    it "works" do
+      expect(print(board)).to eq <<-eos
 | bC bN bB bK bQ bB bN bC |
 | bP bP bP bP bP bP bP bP |
 |                         |
@@ -29,20 +28,14 @@ describe Board do
 | wP wP wP wP wP wP wP wP |
 | wC wN wB wK wQ wB wN wC |
 eos
-      end
-    end
-
-    context "with pieces passed in" do
-      it "sets up board properly" do
-        board = Board.new
-        board.move(:white, 'e4')
-        board.move(:black, 'e5')
-        board.move(:white, 'd4')
-        board.move(:black, 'exd4')
-        board.move(:white, 'Nf3')
-        board.move(:black, 'Nc6')
-        board.move(:white, 'Nxd4')
-        expect(printed_board(Board.new(board.pieces))).to eq <<-eos
+      board.move(:white, 'e4')
+      board.move(:black, 'e5')
+      board.move(:white, 'd4')
+      board.move(:black, 'exd4')
+      board.move(:white, 'Nf3')
+      board.move(:black, 'Nc6')
+      board.move(:white, 'Nxd4')
+      expect(print(board)).to eq <<-eos
 | bC    bB bK bQ bB bN bC |
 | bP bP bP bP    bP bP bP |
 |       bN                |
@@ -52,7 +45,6 @@ eos
 | wP wP wP       wP wP wP |
 | wC wN wB wK wQ wB    wC |
 eos
-      end
     end
   end
 
