@@ -1,5 +1,5 @@
 class StartGame
-  attr_reader :game
+  attr_reader :board, :game
 
   WHITE_POSITIONS = [
     'Pawn   a2',
@@ -41,21 +41,22 @@ class StartGame
 
 
   def initialize(str = "")
-    @str = str
-    @game = Game.new
+    @str   = str
+    @game  = Game.new
+    @board = Board.new
   end
 
   def call
     WHITE_POSITIONS.each do |piece_position|
       piece, position = piece_position.split(' ')
       color = 'white'
-      game.player_one.pieces << Object.const_get(piece).new(color, position)
+      game.player_one.pieces << Object.const_get(piece).new(board, color, position)
     end
 
     BLACK_POSITIONS.each do |piece_position|
       piece, position = piece_position.split(' ')
       color = 'black'
-      game.player_two.pieces << Object.const_get(piece).new(color, position)
+      game.player_two.pieces << Object.const_get(piece).new(board, color, position)
     end
 
     game

@@ -1,10 +1,12 @@
 require 'spec_helper'
 
 describe 'Pawn' do
+  let(:board) { Board.new }
+
   context 'the white player' do
 
     context 'makes the first of the game' do
-      let(:pawn) { Pawn.new(:white, 'c2') }
+      let(:pawn) { Pawn.new(board, :white, 'c2') }
 
       it 'it returns four possible moves' do
         expect(pawn.possible_moves.length).to eq 4
@@ -13,7 +15,7 @@ describe 'Pawn' do
     end
 
     context 'makes a move after having moved at least once' do
-      let(:pawn) { Pawn.new(:white, 'c2') }
+      let(:pawn) { Pawn.new(board, :white, 'c2') }
 
       it 'it returns three possible moves from c3' do
         allow(pawn).to receive(:position).and_return('c3')
@@ -35,7 +37,7 @@ describe 'Pawn' do
   context 'the black player' do
 
     context 'makes the first of the game' do
-      let(:pawn) { Pawn.new(:black, 'c7') }
+      let(:pawn) { Pawn.new(board, :black, 'c7') }
 
       it 'it returns four possible moves' do
         expect(pawn.possible_moves.length).to eq 4
@@ -43,7 +45,7 @@ describe 'Pawn' do
     end
 
     context 'makes a move after having moved at least once' do
-      let(:pawn) { Pawn.new(:white, 'c7') }
+      let(:pawn) { Pawn.new(board, :white, 'c7') }
 
       it 'it returns three possible moves from c6' do
         allow(pawn).to receive(:position).and_return('c6')

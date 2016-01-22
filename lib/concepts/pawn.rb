@@ -1,8 +1,8 @@
 class Pawn < Piece
   attr_reader :initial_position
 
-  def initialize(color, position)
-    super(color, position)
+  def initialize(board, color, position)
+    super(board, color, position)
     @initial_position = position
   end
 

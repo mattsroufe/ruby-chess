@@ -49,13 +49,13 @@ class Board
       WHITE_POSITIONS.each do |piece_position|
         piece, position = piece_position.split(' ')
         color = :white
-        @pieces << Object.const_get(piece).new(color, position)
+        @pieces << Object.const_get(piece).new(self, color, position)
       end
 
       BLACK_POSITIONS.each do |piece_position|
         piece, position = piece_position.split(' ')
         color = :black
-        @pieces << Object.const_get(piece).new(color, position)
+        @pieces << Object.const_get(piece).new(self, color, position)
       end
     end
   end

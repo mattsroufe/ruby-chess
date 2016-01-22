@@ -1,9 +1,9 @@
 class Piece
-  attr_accessor :color, :position
+  attr_accessor :board, :color, :position
 
   HOR_POS = ["a", "b", "c", "d", "e", "f", "g", "h"]
 
-  def initialize(color, position)
+  def initialize(board, color, position)
     @color    = color
     @position = position
   end

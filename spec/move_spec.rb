@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 describe Move do
-  let(:pieces)       { [Bishop.new("white", "c1")] }
+  let(:board)        { Board.new }
+  let(:pieces)       { [Bishop.new(board, :white, "c1")] }
   let(:old_position) { "c1" }
   let(:new_position) { "e1" }
 
