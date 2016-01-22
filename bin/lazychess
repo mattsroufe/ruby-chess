@@ -13,23 +13,28 @@ Dir["./lib/concepts/*.rb"].each {|file| require file }
 Dir["./lib/services/*.rb"].each {|file| require file }
 
 
-current_player = :white
 game = Game.new
+board_printer = BoardPrinter.new
 
+puts ""
 puts "Time to play some mafakan chess!!"
-puts "White begins:"
+puts ""
+puts board_printer.print(game.board)
+puts ""
+print "#{current_player}'s move: "
 
 until game.has_been_won? do
   begin
-    puts BoardPrinter.new.print(game.board)
-    puts "Enter move:"
-    move = gets.chomp
-    game.board.move(current_player, move)
-
-    current_player == :white ? current_player = :black : current_player = :white
-
-    puts "#{current_player}'s move:"
+    input = gets.chomp
+    break if input == "exit"
+    move = game.board.move(current_player, input)
   rescue Piece::IllegalMoveError
-    puts "That's an illegal move"
+    print "That's an illegal move. Please try again: "
+  else
+    errors.clear
+    puts ""
+    puts board_printer.print(game.board)
+    puts ""
+    print "#{current_player}'s move: "
   end
 end

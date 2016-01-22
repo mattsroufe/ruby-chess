@@ -8,8 +8,6 @@ class Pawn < Piece
     moves
   end
 
-  private
-
   def attacking_moves
     moves = []
     right = [Board::FILES[file_index + 1], rank + 1].join
@@ -20,7 +18,7 @@ class Pawn < Piece
   end
 
   def at_start_position?
-    color == :black ? rank == 7 : rank == 2
+    {black: 7, white: 2}[color] == rank
   end
 
   def move(int)
@@ -28,3 +26,11 @@ class Pawn < Piece
     [file, rank + int].join
   end
 end
+
+__END__
+
+An object plays a role like a business owner.  Cooridination should typically be between two other objects.
+Just like a good business owners, effective objects coordinate betweeen objects.
+
+I feel very good about this because this is how you would describe this same scenario in English. When you look at a chess board
+and think about your next move, the first thing you'll have to know is your possible moves.
