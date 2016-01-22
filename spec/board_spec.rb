@@ -28,23 +28,35 @@ describe Board do
 | wP wP wP wP wP wP wP wP |
 | wC wN wB wK wQ wB wN wC |
 eos
+      expect(board.find_piece_by_position('e2').possible_moves).to match_array(['e3', 'e4'])
       board.move(:white, 'e4')
-      board.move(:black, 'e5')
-      board.move(:white, 'd4')
-      board.move(:black, 'exd4')
-      board.move(:white, 'Nf3')
-      board.move(:black, 'Nc6')
-      board.move(:white, 'Nxd4')
+      board.move(:black, 'd5')
       expect(print(board)).to eq <<-eos
-| bC    bB bK bQ bB bN bC |
-| bP bP bP bP    bP bP bP |
-|       bN                |
+| bC bN bB bK bQ bB bN bC |
+| bP bP bP    bP bP bP bP |
 |                         |
-|          wN wP          |
+|          bP             |
+|             wP          |
 |                         |
-| wP wP wP       wP wP wP |
-| wC wN wB wK wQ wB    wC |
+| wP wP wP wP    wP wP wP |
+| wC wN wB wK wQ wB wN wC |
 eos
+      expect(board.find_piece_by_position('e4').possible_moves).to match_array(['d5', 'e5'])
+#       board.move(:white, 'd4')
+#       board.move(:black, 'exd4')
+#       board.move(:white, 'Nf3')
+#       board.move(:black, 'Nc6')
+#       board.move(:white, 'Nxd4')
+#       expect(print(board)).to eq <<-eos
+# | bC    bB bK bQ bB bN bC |
+# | bP bP bP bP    bP bP bP |
+# |       bN                |
+# |                         |
+# |          wN wP          |
+# |                         |
+# | wP wP wP       wP wP wP |
+# | wC wN wB wK wQ wB    wC |
+# eos
     end
   end
 
@@ -69,6 +81,12 @@ eos
   describe "#find_piece_by_position" do
     it "finds the piece at the given position" do
       expect(board.find_piece_by_position('e2')).to be_a Pawn
+    end
+  end
+
+  describe "#empty?" do
+    it "returns whether the position is empty or not" do
+      expect(board.empty?('e2')).to eq false
     end
   end
 
