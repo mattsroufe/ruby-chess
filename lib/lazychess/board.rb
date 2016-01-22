@@ -72,9 +72,16 @@ class Board
         pawn.position = notation
       end
     elsif knight_move?(notation)
-      position = notation[1..-1]
-      knight = pieces.find { |piece| piece.is_a?(Knight) && piece.color == color && piece.possible_moves.include?(position) }
-      knight.position = position
+      if capture?(notation)
+        position = notation.split('x').last
+        knight = pieces.find { |piece| piece.is_a?(Knight) && piece.color == color && piece.possible_moves.include?(position) }
+        remove(position)
+        knight.position = position
+      else
+        position = notation[1..-1]
+        knight = pieces.find { |piece| piece.is_a?(Knight) && piece.color == color && piece.possible_moves.include?(position) }
+        knight.position = position
+      end
     end
   end
 
