@@ -7,21 +7,27 @@ require 'byebug'
 
 require_relative '../lib/services/slack'
 require_relative '../lib/services/session'
+require_relative '../lib/lazychess/game'
 
-require_relative '../lib/lazychess/board'
+# EM.run {
+#   Session.new.run
 
-EM.run {
-  Session.new.run
+#   waterboard = Board.new([
+#     {type: "pawn", position: "d2"}
+#   ])
+# 
+#   #board.move("d3","f5")
+#   puts waterboard
 
-  waterboard = Board.new([
-    {type: "pawn", position: "d2"}
-  ])
+#   # Join channel chess-matthew-samu
+#   # Parrot back what people say
+#   # Create instance of chess board
+#   # Print chess board
+# }
 
-  #board.move("d3","f5")
-  puts waterboard
+# game = Game.new
 
-  # Join channel chess-matthew-samu
-  # Parrot back what people say
-  # Create instance of chess board
-  # Print chess board
-}
+# until game.has_been_won? do
+#   gets "Gimme somehting"
+#   puts "saucey"
+# end

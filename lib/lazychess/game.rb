@@ -10,4 +10,8 @@ class Game
   def players
     [player_one, player_two]
   end
+
+  def has_been_won?
+    false
+  end
 end
