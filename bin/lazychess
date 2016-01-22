@@ -7,27 +7,25 @@ require 'byebug'
 
 require_relative '../lib/services/slack'
 require_relative '../lib/services/session'
-require_relative '../lib/lazychess/game'
+# require_relative '../lib/lazychess/game'
+Dir["./lib/lazychess/*.rb"].each {|file| require file }
+Dir["./lib/concepts/*.rb"].each {|file| require file }
+Dir["./lib/services/*.rb"].each {|file| require file }
 
-# EM.run {
-#   Session.new.run
 
-#   waterboard = Board.new([
-#     {type: "pawn", position: "d2"}
-#   ])
-# 
-#   #board.move("d3","f5")
-#   puts waterboard
+  current_player = :white
+  game = Game.new
 
-#   # Join channel chess-matthew-samu
-#   # Parrot back what people say
-#   # Create instance of chess board
-#   # Print chess board
-# }
+  puts "Time to play some mafakan chess!!"
+  puts "White begins:"
 
-# game = Game.new
+  until game.has_been_won? do
+    puts BoardPrinter.new.print(game.board)
+    puts "Enter move:"
+    move = gets.chomp
+    game.board.move(current_player, move)
 
-# until game.has_been_won? do
-#   gets "Gimme somehting"
-#   puts "saucey"
-# end
+    current_player == :white ? current_player = :black : current_player = :white
+
+    puts "#{current_player}'s move:"
+  end
